@@ -2,6 +2,7 @@ import tensorflow.keras
 from PIL import Image, ImageOps
 import urllib.request
 import numpy as np
+import platform
 import time
 import os
 
@@ -68,10 +69,14 @@ def process_prediction(image):
   return newPrediction, confidence
   
 
-try:
-  os.system('cls')
-except Exception:
-  os.system('clear')
+def clear_screen():
+    operating_system = platform.system()
+    if operating_system == "Linux":
+        os.system('clear')
+    elif operating_system == "Windows":
+        os.system("cls")
+
+clear_screen()
   
 while True:
   image = input("Web>>")
