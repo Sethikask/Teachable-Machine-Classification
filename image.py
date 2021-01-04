@@ -3,6 +3,7 @@ from PIL import Image, ImageOps
 import urllib.request
 import numpy as np
 import time
+import os
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
@@ -22,7 +23,6 @@ def predict(image_file):
   image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
   image_array = np.asarray(image)
-  image.show()
 
   normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
   data[0] = normalized_image_array
@@ -31,14 +31,14 @@ def predict(image_file):
   return prediction
   
   
-  def get_names():
+def get_names():
   f = open('image_labels.txt')
   names = f.read()
   f.close()
   names = names.split("\n")
   return names
   
-  def process_prediction(image):
+def process_prediction(image):
   filename = "image.jpg"
   urllib.request.urlretrieve(image, filename)
 
@@ -67,8 +67,13 @@ def predict(image_file):
 
   return newPrediction, confidence
   
+
+try:
+  os.system('cls')
+except Exception:
+  os.system('clear')
   
-  while True:
+while True:
   image = input("Web>>")
   if image == "quit":
     break
@@ -77,4 +82,4 @@ def predict(image_file):
       name, confidence = process_prediction(image)
       print(name + " - " + confidence)
     except Exception as e:
-      print(e)
+      pass
