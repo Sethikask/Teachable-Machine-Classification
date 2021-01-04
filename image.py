@@ -8,7 +8,7 @@ import time
 np.set_printoptions(suppress=True)
 
 # Load the model
-model = tensorflow.keras.models.load_model('keras_model.h5')
+model = tensorflow.keras.models.load_model('image_model.h5')
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
@@ -32,7 +32,7 @@ def predict(image_file):
   
   
   def get_names():
-  f = open('labels.txt')
+  f = open('image_labels.txt')
   names = f.read()
   f.close()
   names = names.split("\n")
